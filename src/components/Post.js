@@ -32,16 +32,10 @@ export default function Post(props){
       setTotalikes(props.likes);
       return
     }
-    setLiked("heart");
-    setLikecolor("vermelho");
-    let aux = totalikes.replace('.','');
-    aux = `${parseInt(aux) + 1}`
-    let pos = aux.length - 3;
-    let output = [aux.slice(0,pos), "." , aux.slice(pos)].join('');
-    setTotalikes(output);
+    like();
   }  
   return(
-        <div class="post">
+        <div class="post" data-test="post">
             <div class="topo">
               <div class="usuario">
                 <img src={props.uimg} alt={props.uname}/>
@@ -53,25 +47,25 @@ export default function Post(props){
             </div>
 
             <div class="conteudo">
-              <img src={props.pimg} alt={props.pimgalt} onClick={like}/>
+              <img src={props.pimg} alt={props.pimgalt} onClick={like} onDoubleClick={like} data-test="post-image"/>
             </div>
 
             <div class="fundo">
               <div class="acoes">
                 <div>
-                  <ion-icon name={liked} onClick={likebut} class={likecolor}></ion-icon>
+                  <ion-icon name={liked} onClick={likebut} class={likecolor} data-test="like-post"></ion-icon>
                   <ion-icon name="chatbubble-outline"></ion-icon>
                   <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
                 <div>
-                  <ion-icon name={mark} onClick={troca}></ion-icon>
+                  <ion-icon name={mark} onClick={troca} data-test="save-post"></ion-icon>
                 </div>
               </div>
 
               <div class="curtidas">
                 <img src={props.likeimg} alt={props.likename}/>
                 <div class="texto">
-                  Curtido por <strong>{props.likename}</strong> e <strong>outras {totalikes} pessoas</strong>
+                  Curtido por <strong>{props.likename}</strong> e <strong>outras <span data-test="likes-number">{totalikes}</span> pessoas</strong>
                 </div>
               </div>
             </div>
