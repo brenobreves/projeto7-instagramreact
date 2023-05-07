@@ -1,18 +1,28 @@
+import { useState } from "react";
+
 export default function User(){
-    let username = "catanacomics";
+    let [nome, setNome] = useState("catanacomics")
+    let [img , setImg] = useState("assets/img/catanacomics.svg")
     function trocanome(){
-        let novonome = prompt("Coloca seu nome");
+        let novonome = prompt("Coloque seu nome:");
         if(!novonome){
             return
         }
-        username = novonome;
+        setNome(novonome);
+    }
+    function trocaimg(){
+        let novaimg = prompt("Coloque o endereço da imagem:")
+        if(!novaimg){
+            return
+        }
+        setImg(novaimg);
     }
     return(
         <div class="usuario">
-          <img src="assets/img/catanacomics.svg" alt="imagem de perfil"/>
+          <img src={img} alt="imagem de perfil" onClick={trocaimg}/>
           <div class="texto">
             <span>
-              <strong>{username}</strong>
+              <strong>{nome}</strong>
               <ion-icon name="pencil" onClick={trocanome}></ion-icon>
             </span>
           </div>
